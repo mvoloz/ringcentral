@@ -114,7 +114,7 @@ module RingCentral
         :sessionid => session_id,
         :ws => ws
       }
-      response = HTTParty.post(URL, params)
+      response = HTTParty.post(URL, :query => params)
       
       body = response.body
       
@@ -148,7 +148,7 @@ module RingCentral
         :ws => ws
       }
       
-      response = HTTParty.post(URL, params)
+      response = HTTParty.post(URL, :query => params)
       body = response.body
       
       if body[0..1] == SuccessResponse # sucessful responses start with "OK "
