@@ -1,4 +1,3 @@
-require 'rest_client'
 
 module RingCentral
   
@@ -36,9 +35,11 @@ module RingCentral
       username_with_extension = [username, extension].compact.join('*')
 
 
-      response = RestClient.post(URL, {:username => username_with_extension,:password => password}.merge(params))
       
-      status_code = String.new(response.body).to_i # RestClient::Response casting to int behaves strangely
+      resposne = HTTParty.post(URL, :query => {:username => username_with_extension, :password => password}.merge(params))
+      
+      
+      status_code = String.new(response.body).to_i # HTTParty::Response
       
       return STATUS_CODES[status_code]
     end
@@ -67,7 +68,7 @@ module RingCentral
     def self.list(username, password, extension)
       
       params = { :cmd => :list }
-      response = RestClient.post(URL, params.merge(RingCentral.credentials_hash(username, password, extension)))
+      response = HTTParty.post(URL, :query => params.merge(RingCentral.credentials_hash(username, password, extension)))
       body = response.body
       
       if body[0..1] == SuccessResponse # sucessful responses start with "OK "
@@ -79,7 +80,7 @@ module RingCentral
     end
     
     
-    def self.call(username, password, extension, to, from, caller_id, prompt = 1)
+    def self.call(username, password, extension, to, from, caller_id, prompt)
       
       params = {
         :cmd => :call,
@@ -88,7 +89,8 @@ module RingCentral
         :clid => caller_id,
         :prompt => prompt
       }
-      response = RestClient.post(URL, params.merge(RingCentral.credentials_hash(username, password, extension)))
+      response = HTTParty.post(URL, :query => params.merge(RingCentral.credentials_hash(username, password, extension)))
+
       body = response.body
       
       if body[0..1] == SuccessResponse # sucessful responses start with "OK "
@@ -112,7 +114,8 @@ module RingCentral
         :sessionid => session_id,
         :ws => ws
       }
-      response = RestClient.post(URL, params)
+      response = HTTParty.post(URL, params)
+      
       body = response.body
       
       if body[0..1] == SuccessResponse # sucessful responses start with "OK "
@@ -144,7 +147,8 @@ module RingCentral
         :sessionid => session_id,
         :ws => ws
       }
-      response = RestClient.post(URL, params)
+      
+      response = HTTParty.post(URL, params)
       body = response.body
       
       if body[0..1] == SuccessResponse # sucessful responses start with "OK "

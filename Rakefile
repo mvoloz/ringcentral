@@ -7,11 +7,11 @@ begin
     gem.name = "ringcentral"
     gem.summary = "A Ruby library for interacting with the RingCentral RingOut API and FaxOut API."
     gem.description = "A Ruby library for interacting with the RingCentral RingOut API and FaxOut API."
-    gem.email = "todd@toddeichel.com"
-    gem.homepage = "http://github.com/tfe/ringcentral"
-    gem.authors = ["Todd Eichel"]
+    gem.email = "mvoloz@me.com"
+    gem.homepage = "http://github.com/mvoloz/ringcentral"
+    gem.authors = ["Michael Volozin"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    gem.add_dependency "rest-client", ">= 1.6.0"
+    gem.add_dependency "httparty"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

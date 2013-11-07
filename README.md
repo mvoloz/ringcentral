@@ -1,4 +1,4 @@
-[ringcentral](http://github.com/tfe/ringcentral/)
+[ringcentral](http://github.com/mvoloz/ringcentral/)
 ========
 
 A Ruby library for interacting with the RingCentral [RingOut API](https://service.ringcentral.com/ringoutapi/) and [FaxOut API](https://service.ringcentral.com/faxoutapi/).
@@ -15,12 +15,9 @@ Install the gem:
 
     sudo gem install ringcentral
 
-And if you're using Rails (not required), add it to your environment.rb configuration as a gem dependency:
+Add this line to your application's Gemfile:
 
-    config.gem 'ringcentral'
-
-I highly recommend requiring a specific version (with the `:version` argument to `config.gem`) from your app, because this gem is young and the API *will* change.
-
+    gem 'ringcentral'
 
 
 Usage
